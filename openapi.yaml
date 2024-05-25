@@ -6,7 +6,7 @@ info:
     written in SpringBoot
   version: 1.0.0
 servers:
-  - url: http://student-service-12269898:3000/api
+  - url: https://ec89f560-2131-4ae2-8617-08d47e38e4db-dev.e1-eu-north-azure.choreoapis.dev/soa/student-service/v1.0
 #tags:
 #  - name: books
 #    description: In-memory book list cache API
