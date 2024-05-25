@@ -1,66 +1,23 @@
 openapi: 3.0.3
 info:
-  title: Choreo Sample - Book List - Nodejs REST API Service
+  title: Student Service - SpringBoot REST API Service
   description: >-
-    This is a sample API specification for a simple reading list application with in-memory cache
-    written in Nodejs
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    This is an API specification for student Service 
+    written in SpringBoot
   version: 1.0.0
-externalDocs:
-  description: Choreo
-  url: https://choreo.dev
 servers:
-  - url: http://localhost:8080
-tags:
-  - name: books
-    description: In-memory book list cache API
+  - url: https://ec89f560-2131-4ae2-8617-08d47e38e4db-dev.e1-eu-north-azure.choreoapis.dev/soa/student-service/v1.0
+#tags:
+#  - name: books
+#    description: In-memory book list cache API
 paths:
-  /books:
-    summary: List all books
+  /etudiants:
+    summary: List all students
     get:
-      summary: List all books
-      operationId: ListAllBooks
+      summary: List all students
+      operationId: ListAllStudents
       tags:
-        - books
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StringArray"
-    post:
-      summary: Insert a new book
-      operationId: SetNewBook
-      responses:
-        "200":
-          description: Successful operation
-        "400":
-          description: Invalid request body
-      tags:
-        - books
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/KeyValue"
-
-  /books/{uuid}:
-    summary: Get book by UUID
-    get:
-      tags:
-        - books
-      summary: Get book by UUID
-      operationId: GetBookByUUID
-      parameters:
-        - name: uuid
-          in: path
-          description: UUID of book to return
-          required: true
-          schema:
-            type: string
+        - students
       responses:
         "200":
           description: Successful operation
@@ -68,89 +25,134 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/KeyValue"
-        "404":
-          description: UUID not found
-    delete:
-      tags:
-        - books
-      summary: Delete book by UUID
-      description: Deletes a single book based on the UUID supplied
-      operationId: DeleteBookByUUID
-      parameters:
-        - name: uuid
-          in: path
-          description: UUID of book to delete
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful operation
-        "404":
-          description: ISBN not found
-    put:
-      tags:
-        - books
-      summary: Update book status by UUID
-      description: Updates the status of the book based on the UUID supplied
-      operationId: UpdateBookStatusByUUID
-      parameters:
-        - name: uuid
-          in: path
-          description: UUID of book to update
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successful operation
-        "404":
-          description: UUID not found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Status"
-  /healthz:
-    summary: Healthcheck endpoint
-    get:
-      summary: Healthcheck
-      operationId: Healthcheck
-      responses:
-        "200":
-          description: Healthy response
+#    post:
+#      summary: Insert a new book
+#      operationId: SetNewBook
+#      responses:
+#        "200":
+#          description: Successful operation
+#        "400":
+#          description: Invalid request body
+#      tags:
+#        - books
+#      requestBody:
+#        content:
+#          application/json:
+#            schema:
+#              $ref: "#/components/schemas/KeyValue"
+
+#  /books/{uuid}:
+#    summary: Get book by UUID
+#    get:
+#      tags:
+#        - books
+#      summary: Get book by UUID
+#      operationId: GetBookByUUID
+#      parameters:
+#        - name: uuid
+#          in: path
+#          description: UUID of book to return
+#          required: true
+#          schema:
+#            type: string
+#      responses:
+#        "200":
+#          description: Successful operation
+#          content:
+#            application/json:
+#              schema:
+#                $ref: "#/components/schemas/KeyValue"
+#        "404":
+#          description: UUID not found
+#    delete:
+#      tags:
+#        - books
+#      summary: Delete book by UUID
+#      description: Deletes a single book based on the UUID supplied
+#      operationId: DeleteBookByUUID
+#      parameters:
+#        - name: uuid
+#          in: path
+#          description: UUID of book to delete
+#          required: true
+#          schema:
+#            type: string
+#      responses:
+#        "200":
+#          description: Successful operation
+#        "404":
+#          description: ISBN not found
+#    put:
+#      tags:
+#        - books
+#      summary: Update book status by UUID
+#      description: Updates the status of the book based on the UUID supplied
+#      operationId: UpdateBookStatusByUUID
+#      parameters:
+#        - name: uuid
+#          in: path
+#          description: UUID of book to update
+#          required: true
+#          schema:
+#            type: string
+#      responses:
+#        "200":
+#          description: Successful operation
+#        "404":
+#          description: UUID not found
+#      requestBody:
+#        content:
+#          application/json:
+#            schema:
+#              $ref: "#/components/schemas/Status"
 
 components:
   schemas:
-    Key:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: "my-uuid"
-    Status:
-      type: object
-      properties:
-        status:
-          type: string
-          example: "read"
+#    Key:
+#      type: object
+#      properties:
+#        uuid:
+#          type: string
+#          example: "my-uuid"
+#    Status:
+#      type: object
+#      properties:
+#        status:
+#          type: string
+#          example: "read"
     KeyValue:
       type: object
       required:
-        - title
-        - author
-        - status
+        - etudiantId
+        - matricule
+        - nom
+        - cin
+        - dateNaiss
+        - sexe
+        - nationnalite
       properties:
-        title:
+        etudiantId:
+          type: integer
+          example: 1
+        matricule:
           type: string
-          example: "my-title"
-        author:
+          example: "1548"
+        nom:
           type: string
-          example: "my-author"
-        status:
+          example: "John Doe"
+        cin:
           type: string
-          example: "read"
-    StringArray:
-      type: array
-      items:
-        type: string
+          example: "201052015574"
+        dateNaiss:
+          type: string
+          example: "21-06-15"
+        sexe:
+          type: string
+          example: "M"
+        nationnalite:
+          type: string
+          example: "F"
+#    StringArray:
+#      type: array
+#      items:
+#        type: string
