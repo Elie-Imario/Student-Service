@@ -11,7 +11,7 @@ servers:
 #  - name: books
 #    description: In-memory book list cache API
 paths:
-  /etudiants:
+  /api/etudiants:
     summary: List all students
     get:
       summary: List all students
