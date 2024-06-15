@@ -7,11 +7,8 @@ info:
   version: 1.0.0
 servers:
   - url: https://ec89f560-2131-4ae2-8617-08d47e38e4db-dev.e1-eu-north-azure.choreoapis.dev/soa/student-service/v1.0
-#tags:
-#  - name: books
-#    description: In-memory book list cache API
 paths:
-  /etudiants:
+  /api/etudiants:
     summary: List all students
     get:
       summary: List all students
@@ -24,103 +21,106 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/KeyValue"
-#    post:
-#      summary: Insert a new book
-#      operationId: SetNewBook
-#      responses:
-#        "200":
-#          description: Successful operation
-#        "400":
-#          description: Invalid request body
-#      tags:
-#        - books
-#      requestBody:
-#        content:
-#          application/json:
-#            schema:
-#              $ref: "#/components/schemas/KeyValue"
+                $ref: "#/components/schemas/EtudiantSchemaKeyWithPK"
 
-#  /books/{uuid}:
-#    summary: Get book by UUID
-#    get:
-#      tags:
-#        - books
-#      summary: Get book by UUID
-#      operationId: GetBookByUUID
-#      parameters:
-#        - name: uuid
-#          in: path
-#          description: UUID of book to return
-#          required: true
-#          schema:
-#            type: string
-#      responses:
-#        "200":
-#          description: Successful operation
-#          content:
-#            application/json:
-#              schema:
-#                $ref: "#/components/schemas/KeyValue"
-#        "404":
-#          description: UUID not found
-#    delete:
-#      tags:
-#        - books
-#      summary: Delete book by UUID
-#      description: Deletes a single book based on the UUID supplied
-#      operationId: DeleteBookByUUID
-#      parameters:
-#        - name: uuid
-#          in: path
-#          description: UUID of book to delete
-#          required: true
-#          schema:
-#            type: string
-#      responses:
-#        "200":
-#          description: Successful operation
-#        "404":
-#          description: ISBN not found
-#    put:
-#      tags:
-#        - books
-#      summary: Update book status by UUID
-#      description: Updates the status of the book based on the UUID supplied
-#      operationId: UpdateBookStatusByUUID
-#      parameters:
-#        - name: uuid
-#          in: path
-#          description: UUID of book to update
-#          required: true
-#          schema:
-#            type: string
-#      responses:
-#        "200":
-#          description: Successful operation
-#        "404":
-#          description: UUID not found
-#      requestBody:
-#        content:
-#          application/json:
-#            schema:
-#              $ref: "#/components/schemas/Status"
+  /etudiant:
+    post:
+      summary: Insert a new student
+      operationId: SetNewStudent
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EtudiantSchemaKeyWithPK"
+
+        "400":
+          description: Invalid request body
+      tags:
+        - students
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EtudiantSchemaKey"
+
+  /etudiants/{id}:
+    summary: Get book by id
+    get:
+      tags:
+        - students
+      summary: Get student by ID
+      operationId: GetStudentByID
+      parameters:
+        - name: id
+          in: path
+          description: ID of student to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EtudiantSchemaKeyWithPK"
+        "404":
+          description: Student not found
+
+    delete:
+      tags:
+        - students
+      summary: Delete student by ID
+      description: Deletes a single student based on the ID supplied
+      operationId: DeleteStudentByID
+      parameters:
+        - name: id
+          in: path
+          description: ID of student to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+        "404":
+          description: Student ID not found
+
+    put:
+      tags:
+        - students
+      summary: Update student infos by ID
+      description: Updates the infos of the student based on the ID supplied
+      operationId: UpdateStudentByID
+      parameters:
+        - name: id
+          in: path
+          description: ID of student to update
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EtudiantSchemaKeyWithPK"
+
+        "404":
+          description: UUID not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EtudiantSchemaKey"
+
 
 components:
   schemas:
-#    Key:
-#      type: object
-#      properties:
-#        uuid:
-#          type: string
-#          example: "my-uuid"
-#    Status:
-#      type: object
-#      properties:
-#        status:
-#          type: string
-#          example: "read"
-    KeyValue:
+    EtudiantSchemaKeyWithPK:
       type: object
       required:
         - etudiantId
@@ -152,7 +152,32 @@ components:
         nationnalite:
           type: string
           example: "F"
-#    StringArray:
-#      type: array
-#      items:
-#        type: string
+
+    EtudiantSchemaKey:
+      type: object
+      required:
+        - matricule
+        - nom
+        - cin
+        - dateNaiss
+        - sexe
+        - nationnalite
+      properties:
+        matricule:
+          type: string
+          example: "1548"
+        nom:
+          type: string
+          example: "John Doe"
+        cin:
+          type: string
+          example: "201052015574"
+        dateNaiss:
+          type: string
+          example: "21-06-15"
+        sexe:
+          type: string
+          example: "M"
+        nationnalite:
+          type: string
+          example: "F"
