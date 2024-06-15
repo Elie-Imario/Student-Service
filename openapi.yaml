@@ -8,7 +8,7 @@ info:
 servers:
   - url: https://ec89f560-2131-4ae2-8617-08d47e38e4db-dev.e1-eu-north-azure.choreoapis.dev/soa/student-service/v1.0
 paths:
-  /api/etudiants:
+  /etudiants:
     summary: List all students
     get:
       summary: List all students
