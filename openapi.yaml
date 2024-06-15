@@ -6,7 +6,7 @@ info:
     written in SpringBoot
   version: 1.0.0
 servers:
-  - url: https://ec89f560-2131-4ae2-8617-08d47e38e4db-dev.e1-eu-north-azure.choreoapis.dev/soa/student-service/v1.0
+  - url: https://b5391b71-c894-489c-9927-c6bb5e26ebc5-dev.e1-eu-north-azure.choreoapis.dev/etudiant-service-app/etudiant-service/v1.0
 paths:
   /etudiants:
     summary: List all students
